@@ -138,11 +138,15 @@ nav ul li a:hover::after {
   width: 100%;
 }
 
-nav ul li:first-child a::before {
+/* MAPEAMENTO DOS LINKS DO MENU POR POSIÇÃO */
+nav ul li:nth-child(1) a::before {
   content: "Introdução";
 }
-nav ul li:last-child a::before {
+nav ul li:nth-child(2) a::before {
   content: "Poderes";
+}
+nav ul li:nth-child(3) a::before {
+  content: "Galeria";
 }
 nav ul li a {
   font-size: 0;
@@ -414,6 +418,78 @@ section + section {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* ==========================================================================
+   ESTILOS COMPLEMENTARES: SEÇÃO GALERIA DE CARDS
+   ========================================================================== */
+.galeria-titulo {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.galeria-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.galeria-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  overflow: hidden;
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.card-img-wrapper {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.card-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.card-info {
+  padding: 1.5rem;
+}
+
+.card-info h3 {
+  font-size: 1.15rem;
+  color: var(--cor-text);
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.card-info p {
+  font-size: 0.9rem;
+  color: var(--cor-subtext);
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+/* Efeitos de Hover nos Cards */
+.galeria-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(197, 169, 110, 0.3);
+  box-shadow: 0 10px 25px -10px rgba(197, 169, 110, 0.15);
+}
+
+.galeria-card:hover .card-img-wrapper img {
+  transform: scale(1.08);
+}
+
+.galeria-card:hover .card-info h3 {
+  color: var(--cor-accent);
+}
+/* ========================================================================== */
 
 footer {
   border-top: 1px solid var(--cor-borda);
