@@ -471,7 +471,6 @@ section + section {
   line-height: 1.5;
 }
 
-/* Efeitos de Hover nos Cards */
 .galeria-card:hover {
   transform: translateY(-5px);
   border-color: rgba(197, 169, 110, 0.3);
@@ -485,7 +484,6 @@ section + section {
 .galeria-card:hover .card-info h3 {
   color: var(--cor-accent);
 }
-/* ========================================================================== */
 
 footer {
   border-top: 1px solid var(--cor-borda);
