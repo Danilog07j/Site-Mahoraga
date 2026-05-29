@@ -1,0 +1,347 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@600;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --cor-fundo: #0b0c10;
+  --cor-text: #f5f5f7;
+  --cor-subtext: #a0a1a6;
+  --cor-borda: rgba(255, 255, 255, 0.07);
+  --cor-accent: #c5a96e;
+  --cor-accent-dim: rgba(197, 169, 110, 0.12);
+  --fonteTitulo: "Geist", sans-serif;
+  --fonteCorpo: "Plus Jakarta Sans", sans-serif;
+  --nav-height: 64px;
+}
+
+body {
+  background-color: var(--cor-fundo);
+  color: var(--cor-text);
+  font-family: var(--fonteCorpo);
+  font-weight: 400;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ─── INPUTS ESCONDIDOS DO CARROSSEL ─── */
+input[type="radio"][name="slide"] {
+  display: none;
+}
+
+/* ─── NAVBAR ─── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.5rem;
+  background: rgba(11, 12, 16, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+nav img {
+  height: 75px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+nav ul li a {
+  font-family: var(--fonteCorpo);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--cor-subtext);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+nav ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--cor-accent);
+  transition: width 0.25s ease;
+}
+
+nav ul li a:hover {
+  color: var(--cor-text);
+}
+
+nav ul li a:hover::after {
+  width: 100%;
+}
+
+/* Link text fix */
+nav ul li:first-child a::before { content: "Introdução"; }
+nav ul li:last-child a::before { content: "Poderes"; }
+nav ul li a { font-size: 0; }
+nav ul li a::before {
+  font-size: 0.875rem;
+}
+
+/* ─── HEADER / CARROSSEL ─── */
+header#Topo {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.carrossel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.slides-passagem {
+  display: flex;
+  width: 300%;
+  height: 100%;
+  animation: autoSlide 12s infinite;
+}
+
+@keyframes autoSlide {
+  0%        { transform: translateX(0); }
+  28%       { transform: translateX(0); }
+  33.33%    { transform: translateX(-33.333%); }
+  61.33%    { transform: translateX(-33.333%); }
+  66.66%    { transform: translateX(-66.666%); }
+  94.66%    { transform: translateX(-66.666%); }
+  100%      { transform: translateX(0); }
+}
+
+.slide {
+  width: calc(100% / 3);
+  height: 100%;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* Gradiente sobre as fotos */
+.slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(11, 12, 16, 0.15) 0%,
+    rgba(11, 12, 16, 0.0) 40%,
+    rgba(11, 12, 16, 0.6) 80%,
+    rgba(11, 12, 16, 1) 100%
+  );
+}
+
+/* ─── DOTS DO CARROSSEL ─── */
+.nav {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+/* Animação dos dots sincronizada */
+.nav label:nth-child(1) {
+  animation: dot1 12s infinite;
+}
+.nav label:nth-child(2) {
+  animation: dot2 12s infinite;
+}
+.nav label:nth-child(3) {
+  animation: dot3 12s infinite;
+}
+
+@keyframes dot1 {
+  0%, 28%, 94.66%, 100% { background: rgba(255,255,255,0.9); width: 18px; border-radius: 3px; }
+  33.33%, 66.66%         { background: rgba(255,255,255,0.3); width: 6px; border-radius: 50%; }
+}
+@keyframes dot2 {
+  0%, 28%, 61.33%, 94.66%, 100% { background: rgba(255,255,255,0.3); width: 6px; border-radius: 50%; }
+  33.33%                          { background: rgba(255,255,255,0.9); width: 18px; border-radius: 3px; }
+}
+@keyframes dot3 {
+  0%, 61.33%, 100% { background: rgba(255,255,255,0.3); width: 6px; border-radius: 50%; }
+  66.66%, 94.66%   { background: rgba(255,255,255,0.9); width: 18px; border-radius: 3px; }
+}
+
+/* ─── SEÇÕES ─── */
+section {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 6rem 2rem;
+}
+
+section h1 {
+  font-family: var(--fonteTitulo);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--cor-text);
+  line-height: 1.2;
+  margin-bottom: 2rem;
+}
+
+section p {
+  font-size: 1rem;
+  color: var(--cor-subtext);
+  margin-bottom: 1.25rem;
+  font-weight: 400;
+}
+
+/* Divisor sutil entre seções */
+section + section {
+  border-top: 1px solid var(--cor-borda);
+}
+
+/* Accent no título da primeira seção */
+#Introdução h1 {
+  background: linear-gradient(135deg, #f5f5f7 60%, var(--cor-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--cor-borda);
+  padding: 2.5rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 100%;
+}
+
+footer h3 {
+  font-family: var(--fonteCorpo);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--cor-subtext);
+  letter-spacing: 0.01em;
+  opacity: 0.6;
+}
+
+footer a {
+  font-family: var(--fonteCorpo);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--cor-accent);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+footer a::before {
+  content: '↑';
+  font-size: 0.75rem;
+}
+
+footer a:hover {
+  opacity: 1;
+}
+
+/* ─── TIPOGRAFIA GERAL ─── */
+h1, h2, h3 {
+  font-family: var(--fonteTitulo);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  color: var(--cor-text);
+}
+
+p {
+  font-family: var(--fonteCorpo);
+  font-weight: 400;
+  color: var(--cor-subtext);
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+}
+
+#loading-screen {
+  position: fixed;
+  inset: 0;
+  background: #0b0c10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  z-index: 9999;
+  animation: fadeOut 0.6s ease forwards 2.5s;
+}
+
+#loading-screen img {
+  width: 140px;
+  animation: spin 3s linear infinite;
+}
+
+#loading-screen span {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: #c5a96e;
+  text-transform: uppercase;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes spin    { to { transform: rotate(360deg); } }
+@keyframes pulse   { 0%,100%{opacity:.3} 50%{opacity:1} }
+@keyframes fadeOut { to { opacity: 0; pointer-events: none; } }
